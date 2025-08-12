@@ -1,43 +1,101 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { Component } from "react";
-import { View, Button, Image, Text, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+//----------------------------------------------------------------------
 
 class App extends Component {
-  clicar = () => {
-    alert("Botão clicado!");
+//construtor que vai inciar a funçao state
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: '',
+      input: ''
+    };
+
+    this.pegaNome = this.pegaNome.bind(this);
+    this.Entrar = this.Entrar.bind(this)
   }
 
+  pegaNome(texto) {
+    if (texto.length > 0) {
+      this.setState({ nome: 'Bem vindo ' + texto });
+    } else {
+      this.setState({ nome: '' });
+    }
+  }
+
+  Entrar = () => {
+    alert('digite seu nome !')
+
+  }
+//----------------------------------------------------------------------
+
+//estrutura principal do app
   render() {
-    let nome = "mateus";
-    let img = "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=60";
-
     return (
-      <View>
-        <Text style={{ color: 'red', fontSize: 12, margin: 12 }}>ola mundo</Text>
-        <Text>{nome}</Text>
+      <View style={styles.container}>
+        <View>
+          <Text style={{textAlign:'center',fontSize:50,color:'lightblue'}}> Quem é você </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite seu nome:"
+            onChangeText={this.pegaNome}
+          />
 
-        <Text style={estilo.texto}>hallo word</Text>
-        <Text style={estilo.area}>Área com margem</Text>
+          <Button title="entrar" onPress={this.Entrar} />
+          <Text style={styles.texto}>{this.state.nome}</Text>
+          
 
-        <Image source={{ uri: img }} style={{ width: 100, height: 100 }} />
 
-        <Button title="clicar" onPress={this.clicar} />
+        </View>
+
+        <View style={styles.login}>
+          <Text>login</Text>
+          <Button title="google"/>
+          <Button title="email"/>
+        </View>
+
       </View>
+      
     );
   }
 }
+//----------------------------------------------------------------------
 
-const estilo = StyleSheet.create({
-  area: {
-    marginTop: 40
+//propriedades css ultilizadas em tags
+const styles = StyleSheet.create({
+  container: {
+    flexDirection:'column',
+    margin:10,
+    padding: 20,
+    alignItems: 'center',
+    marginTop: 50,
+    justifyContent:'space-between'
+  },
+  input: {
+    height: 45,
+    borderWidth: 1,
+    borderColor: 'green',
+    margin: 10,
+    fontSize: 20,
+    padding: 10,
+    borderRadius:20
   },
   texto: {
-    fontSize: 25,
-    color: '#FF0000'
-  },
-  fundo: {
     textAlign: 'center',
-    backgroundColor: '#99CC32'
+    fontSize: 25
+  },
+  login: {
+    alignItems:'center',
+    justifyContent:'flex-end',
+    textAlign: 'justify',
+    backgroundColor:'red',
+    marginTop:'auto'
+
+  },
+  butao:{
+    borderRadius:10
+
   }
 });
 
