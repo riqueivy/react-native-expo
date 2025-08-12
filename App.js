@@ -18,15 +18,27 @@ class App extends Component {
 
   pegaNome(texto) {
     if (texto.length > 0) {
-      this.setState({ nome: 'Bem vindo ' + texto });
+      this.setState({ nome: 'Email ' + texto + ' registrado!'});
     } else {
       this.setState({ nome: '' });
     }
   }
 
   Entrar = () => {
-    alert('digite seu nome !')
+    let nomePessoa = this.state.input;
+    if(this.state.input == ''){
+      alert('%VALOR INVALIDO%');
+      return;
+    } else {
+      this.setState({nome: 'email ' + nomePessoa + ' registrado'});
+      return;
+    }
+    
 
+  }
+
+  Logar = () =>{
+    alert('ERRO! tente novamente mais tarde')
   }
 //----------------------------------------------------------------------
 
@@ -38,8 +50,8 @@ class App extends Component {
           <Text style={{textAlign:'center',fontSize:50,color:'lightblue'}}> Quem é você </Text>
           <TextInput
             style={styles.input}
-            placeholder="Digite seu nome:"
-            onChangeText={this.pegaNome}
+            placeholder="Digite seu email:"
+            onChangeText={(texto) => this.setState({input: texto})}
           />
 
           <Button title="entrar" onPress={this.Entrar} />
@@ -48,11 +60,14 @@ class App extends Component {
 
 
         </View>
-
         <View style={styles.login}>
-          <Text>login</Text>
-          <Button title="google"/>
-          <Button title="email"/>
+          <Text style={{fontSize:18}}>Login</Text>
+          
+        </View>
+
+        <View style={styles.formas}>
+          <Button title="google" onPress={this.Logar}/>
+          <Button title="numero" onPress={this.Logar}/>
         </View>
 
       </View>
@@ -85,17 +100,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25
   },
-  login: {
+  formas: {
     alignItems:'center',
-    justifyContent:'flex-end',
-    textAlign: 'justify',
-    backgroundColor:'red',
-    marginTop:'auto'
+    justifyContent:'space-between',
+    textAlign: 'center',
+    marginTop:10,
+    flexDirection:'row',
+    gap:20
 
   },
   butao:{
     borderRadius:10
 
+  },
+  login:{
+    marginTop:50, 
+    backgroundColor:'lightblue',
+    width:'100%', 
+    alignItems:'center', 
+    borderRadius:10,
+    fontSize:50
   }
 });
 
