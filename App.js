@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity, Image, ImageBackground } from "react-native";
 //----------------------------------------------------------------------
 
 class App extends Component {
@@ -40,14 +40,23 @@ class App extends Component {
   Logar = () =>{
     alert('ERRO! tente novamente mais tarde')
   }
+  
 //----------------------------------------------------------------------
 
 //estrutura principal do app
   render() {
+    let img = 'https://img.lovepik.com/png/20231120/google-internet-icon-vector-Google-system-engineer_642910_wh860.png'
+    let logo ='https://i.pinimg.com/originals/3b/3a/6a/3b3a6a676a48c1479468744d1c8134da.jpg'
     return (
-      <View style={styles.container}>
+      <View>
+        <ImageBackground 
+          source={{uri: 'https://img.freepik.com/fotos-premium/papel-de-parede-movel-com-padrao-roxo-gradiente_53876-1087015.jpg?semt=ais_hybrid&w=740&q=80'}}
+          style={styles.fundo}
+          resizeMode="cover">
+          
+        
         <View>
-          <Text style={{textAlign:'center',fontSize:50,color:'lightblue'}}> Quem é você </Text>
+          <Text style={{textAlign:'center',fontSize:50,color:'lightblue'}}> Quem é você ? </Text>
           <TextInput
             style={styles.input}
             placeholder="Digite seu email:"
@@ -66,10 +75,14 @@ class App extends Component {
         </View>
 
         <View style={styles.formas}>
-          <Button title="google" onPress={this.Logar}/>
-          <Button title="numero" onPress={this.Logar}/>
+          <TouchableOpacity style={styles.butao} onPress={this.Logar}>
+            <Image source={{ uri: img}} style={{width: 40, height: 40, margin:13}}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.butao} onPress={this.Logar}>
+            <Image source={{ uri: logo}} style={{width: 50, height: 50, margin:10}}/>
+          </TouchableOpacity>
         </View>
-
+        </ImageBackground>
       </View>
       
     );
@@ -81,16 +94,16 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection:'column',
-    margin:10,
+    margin:30,
     padding: 20,
     alignItems: 'center',
-    marginTop: 50,
-    justifyContent:'space-between'
+    marginTop: 80,
+    justifyContent:'center'
   },
   input: {
     height: 45,
     borderWidth: 1,
-    borderColor: 'green',
+    borderColor: 'white',
     margin: 10,
     fontSize: 20,
     padding: 10,
@@ -110,16 +123,26 @@ const styles = StyleSheet.create({
 
   },
   butao:{
-    borderRadius:10
+    borderRadius:5,
+    height:35,
+    width:70
+    
 
   },
   login:{
-    marginTop:50, 
-    backgroundColor:'lightblue',
-    width:'100%', 
+    marginTop:'70%', 
+    backgroundColor:'#cf9bcc',
+    width:'60%', 
     alignItems:'center', 
     borderRadius:10,
-    fontSize:50
+
+  },
+  fundo:{
+    justifyContent:'center',
+    alignItems:'center',
+    height:'100%',
+    width:'100%'
+
   }
 });
 
